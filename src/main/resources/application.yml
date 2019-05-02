@@ -1,0 +1,15 @@
+server.port: 8181
+
+
+Spring:
+ resources:
+    static-locations: classpath:/static
+
+# freemarker
+spring.freemarker.template-loader-path: classpath:/templates
+spring.freemarker.suffix: .ftl
+
+
+
+# mongodb
+spring.data.mongodb.uri: mongodb://localhost:27017/testdb

@@ -1,0 +1,18 @@
+
+
+
+.main {
+    display: flex;
+}
+
+.left-side, .right-side {
+    width: 200px;
+}
+
+.main-container {
+    flex: 1;
+}
+
+.main-footer {
+    text-align: center;
+}

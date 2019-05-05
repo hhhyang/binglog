@@ -1,18 +1,86 @@
 
+body {
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+    line-height: normal;
+    color: #333;
+}
+
+.main-nav {
+    border-bottom: 1px solid #e8eaec;
+}
+
+
+.main-nav-menu {
+    margin: 0 auto;
+    width: 800px;
+}
 
 
 .main {
     display: flex;
+    max-width: 1800px;
+    margin: 0 auto;
 }
 
 .left-side, .right-side {
-    width: 200px;
+    width: 400px;
+    min-width: 300px;
 }
 
 .main-container {
     flex: 1;
+    margin: 20px 20px;
+}
+
+.main-container-user-image-wrap {
+
+    display: inline-block;
+    width: 32px;
+
+}
+
+/* 让图片自适应包含框大小 */
+.main-container-user-image {
+
+    max-width: 100%;
+    max-height: 100%;
+
+}
+
+.main-container-user-detail {
+    display: inline-block;
+}
+
+.main-container-user-stat-item {
+    display: inline-block;
+    width: 32px;
+}
+
+.main-container-post-stat-item {
+    display: inline-block;
+    min-width: 32px;
+    max-width: 192px;
+    color: darkgrey;
+}
+
+.post-digest-listitem {
+
+    padding: 10px 0;
+    border-top: 1px solid #e8eaec;
+
+}
+
+.post-title {
+
+    padding: 10px 0 20px 0;
+
+}
+
+.ivu-input-wrapper {
+    margin: 14px 0 14px 0;
 }
 
 .main-footer {
     text-align: center;
+    margin-bottom: 30px;
 }

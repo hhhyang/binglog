@@ -1,18 +1,97 @@
 
 
+body {
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+    line-height: normal;
+    font-size: 12px;
+    color: #333;
+}
+
+.main-nav {
+    border-bottom: 1px solid #e8eaec;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+
+.main-nav-menu {
+    margin: 0 auto;
+    width: 800px;
+}
+
 .main {
     display: flex;
+    margin: 0 auto;
 }
 
 .left-side, .right-side {
-    width: 200px;
-    min-width: 200px;
+    width: 300px;
+    margin-left: calc((100% - 1400px) / 2);
+}
+
+.left-toc {
+
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 300px;
+    margin-left: calc((100% - 1400px) / 2 + 20px);
+    overflow: hidden;
 }
 
 .main-container {
     flex: 1;
+    margin: 20px 20px;
+    width: 1000px;
+    min-width: 800px;
+    max-width: 1200px;
 }
+
+.post-title {
+
+    text-align: center;
+    padding: 30px 0px;
+
+}
+
+
+.post-title > h1 {
+    font-size: 24px;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+
+    padding: 20px 0px;
+
+}
+
+
+.main-container-post-stat-item {
+    display: inline-block;
+    min-width: 32px;
+    max-width: 192px;
+    color: darkgrey;
+}
+
+.main-container-post-stat {
+    text-align: center;
+}
+
+.post-body {
+
+    font-size: 14px;
+    line-height: 1.75;
+
+}
+
+.ivu-input-wrapper {
+    margin: 14px 0 14px 0;
+}
+
 
 .main-footer {
     text-align: center;
+    margin-bottom: 30px;
 }

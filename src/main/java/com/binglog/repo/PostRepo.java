@@ -1,13 +1,13 @@
 package com.binglog.repo;
 
-import com.binglog.domain.Article;
+import com.binglog.domain.Post;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface ArticleRepo extends MongoRepository<Article, String> {
+public interface PostRepo extends MongoRepository<Post, String> {
 
-    List<Article> findByAuthor(final String author);
+    List<Post> findByAuthor(final String author);
 }

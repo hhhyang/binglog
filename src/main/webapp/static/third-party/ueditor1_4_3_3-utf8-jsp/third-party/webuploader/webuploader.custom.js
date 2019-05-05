@@ -5275,7 +5275,7 @@
     
                     if(quality) setQuality(quality);
     
-                    // Initialize bit writer
+                    // Initialize bit writer.ftl
                     byteout = new Array();
                     bytenew=0;
                     bytepos=7;

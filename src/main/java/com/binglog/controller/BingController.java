@@ -1,7 +1,7 @@
 package com.binglog.controller;
 
-import com.binglog.domain.Article;
-import com.binglog.repo.ArticleRepo;
+import com.binglog.domain.Post;
+import com.binglog.repo.PostRepo;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
@@ -9,7 +9,6 @@ import com.vladsch.flexmark.ext.gfm.issues.GfmIssuesExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
 import com.vladsch.flexmark.ext.gfm.users.GfmUsersExtension;
-import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
@@ -39,7 +38,7 @@ public class BingController {
     private static final Logger LOG = LoggerFactory.getLogger(BingController.class);
 
     @Autowired
-    private ArticleRepo articleRepo;
+    private PostRepo postRepo;
 
     private final Parser parser;
     private final HtmlRenderer renderer;
@@ -112,36 +111,49 @@ public class BingController {
         return options;
     }
 
-    @GetMapping("/posts")
+    @GetMapping("/u/{uid}")
     public ModelAndView getPosts(Model model) {
 
 
-        List<Article> articles = articleRepo.findByAuthor("yang");
+        List<Post> posts = postRepo.findByAuthor("yang");
 
-        for (Article article : articles) {
-            updateArticleIfNeeded(article);
+        for (Post post : posts) {
+            updateArticleIfNeeded(post);
         }
 
 
-        model.addAttribute("articles", articles);
+        model.addAttribute("posts", posts);
         model.addAttribute("name", "hello");
 
         return new ModelAndView("user");
     }
 
 
-    @GetMapping("/p/{id}")
-    public ModelAndView getPostById(@PathVariable String id) {
+    @GetMapping("/p/{pid}")
+    public ModelAndView getPostByPid(@PathVariable String pid) {
 
-        LOG.error("id: {}", id);
-        Article article = articleRepo.findById(id).get();
-        LOG.error("id: {}", article.getTitle());
-        updateArticleIfNeeded(article);
+        LOG.error("id: {}", pid);
+        Post post = postRepo.findById(pid).get();
+        LOG.error("id: {}", post.getTitle());
+        updateArticleIfNeeded(post);
 
-        return new ModelAndView("post", "article", article);
+        return new ModelAndView("post", "post", post);
 
     }
 
+    @GetMapping("/writer")
+    public ModelAndView getWriter() {
+
+        return new ModelAndView("writer");
+
+    }
+
+    @GetMapping("/uploader")
+    public ModelAndView geUploader() {
+
+        return new ModelAndView("uploader");
+
+    }
 
     private String extractSampleText(final String htmlBody, final int len) {
 
@@ -177,11 +189,11 @@ public class BingController {
 
     }
 
-    private Article updateArticleIfNeeded(final Article article) {
+    private Post updateArticleIfNeeded(final Post post) {
 
-        boolean htmlBodyIsEmpty = StringUtils.isEmpty(article.getHtmlBody());
-        boolean sampleTextIsEmpty = StringUtils.isEmpty(article.getSampleText());
-        boolean tocIsEmpty = StringUtils.isEmpty(article.getToc());
+        boolean htmlBodyIsEmpty = StringUtils.isEmpty(post.getHtmlBody());
+        boolean sampleTextIsEmpty = StringUtils.isEmpty(post.getSampleText());
+        boolean tocIsEmpty = StringUtils.isEmpty(post.getToc());
         boolean updated = false;
 
         htmlBodyIsEmpty = true;
@@ -190,32 +202,32 @@ public class BingController {
 
         if (htmlBodyIsEmpty) {
 
-            String htmlBody = mdTextToHtml(article.getMdBody());
-            article.setHtmlBody(htmlBody);
+            String htmlBody = mdTextToHtml(post.getMdBody());
+            post.setHtmlBody(htmlBody);
             updated = true;
         }
 
         if (sampleTextIsEmpty) {
 
-            String sampleText = extractSampleText(article.getHtmlBody(), 300);
-            article.setSampleText(sampleText);
+            String sampleText = extractSampleText(post.getHtmlBody(), 300);
+            post.setSampleText(sampleText);
 
             updated = true;
         }
 
         if (tocIsEmpty) {
 
-            String toc = extractToc(article.getMdBody());
-            article.setToc(toc);
+            String toc = extractToc(post.getMdBody());
+            post.setToc(toc);
 
             updated = true;
         }
 
         if (updated) {
-            articleRepo.save(article);
+            postRepo.save(post);
         }
 
-        return article;
+        return post;
 
     }
 

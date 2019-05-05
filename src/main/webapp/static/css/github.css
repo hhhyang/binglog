@@ -10,12 +10,18 @@ code {
   background: #f8f8f8;
 }
 
+code:not(.hljs):not(.language-java) {
+  color: #ff9900;
+}
+
 .hljs, .language-java {
   display: block;
   overflow-x: auto;
   padding: 0.5em;
   color: #333;
   background: #f8f8f8;
+  font-size: 12px;
+  line-height: normal;
 }
 
 .hljs-comment,
